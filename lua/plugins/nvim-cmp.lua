@@ -1,6 +1,11 @@
 return {
   "hrsh7th/nvim-cmp",
   opts = {
+    -- This will disable cmp inside comments
+    enabled = function()
+      local context = require("cmp.config.context")
+      return not (context.in_treesitter_capture("comment") == true or context.in_syntax_group("Comment"))
+    end,
     -- List of available sources: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
     sources = require("cmp").config.sources({
       -- LSP autocomplete
